@@ -33,14 +33,25 @@ var VideoPage = React.createClass({
 		return (
 			<div className="videoPage">
 				<div className="controls">
-					<p className = "instructions">Iterate through <code>this.state.videos</code> and create a new <code>RaisedButton</code> component for each one</p>
+				{
+					this.state.videos.map(function(d, i) {
+						return <RaisedButton
+											className="button"
+											key={"video-" + i}
+											id={i}
+											label={d.title}
+											// disabled = {this.state.currentVideo == i}
+											onClick={() => {this.chooseVideo(i)}}
+											/>
+					})
+				}
 				</div>
 				<div>
 					{
 						// This is a great way to conditionally show something!
 						// Pass important information into Video through props
 						selectedVideo &&
-						<Video />
+						<Video url={selectedVideo.url}/>
 					}
 				</div>
 			</div>
